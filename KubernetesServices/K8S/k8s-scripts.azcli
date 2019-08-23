@@ -1,0 +1,48 @@
+#Filename : k8s-scripts.azcli
+
+# Login to Azure
+az login
+
+# Create a resource group
+az group create -n K8SGroup -l centralindia
+
+# Confirm group creation by listingit
+az group list -o table
+
+# Create Kubernetes clusters
+az aks create --name k8scluster --location southeastasia -g K8SGroup --enable-addons monitoring --generate-ssh-keys  --node-count 2
+
+#Install Kubernetes CLI (Kubernetes.exe)
+#az aks install-cli
+
+# Authenticate to K8S cluster
+az aks get-credentials -n k8scluster -g K8SGroup
+
+# Verify the kubectl configuration 
+kubectl config view
+
+# List the nodes
+kubectl get nodes
+
+#List of pods
+kubectl get pods
+
+#List the replica sets
+kubectl get rs
+
+#LIst the service
+kubectl get svc
+
+# List the deployments
+kubectl get deploy
+
+#Deploy insurance service
+kubectl apply -f ./yaml/insuranceportal-service.yaml
+
+# Create file insuranceportal-deploy file then deploy (newly deploy)
+kubectl apply -f ./yaml/insuranceportal-deploy.yaml
+
+# Update chnages the use
+kubectl replace -f ./yaml/insuranceportal-deploy.yaml
+
+

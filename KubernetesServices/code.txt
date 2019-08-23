@@ -1,0 +1,159 @@
+1. Create folder named 'K8S' to store all kubernetes services
+2. Install "Azure CLI tools"
+	"YAML"
+3. Create new file 
+	filename : k8s-scripts.azcli
+4. Write below code-
+----------------------------------------
+#Filename : k8s-scripts.azcli
+
+# Login to Azure
+az login
+
+# Create a resource group
+az group create -n K8SGroup -l centralindia
+
+# Confirm group creation by listingit
+az group list -o table
+
+# Create Kubernetes clusters
+az aks create --name k8scluster --location southeastasia -g K8SGroup --enable-addons monitoring --generate-ssh-keys --node-vm-size Standard_D1 --node-count 3
+
+--------------------------------------------
+5. Open cmd and type
+ kubectl
+
+	If not installed it will install
+
+	az aks install-cli
+
+6. # Authenticate to K8S cluster
+az aks get-credentials -n k8scluster -g K8SGroup
+
+D:\Hexa-FSD-Batch-4\Kanchan\KubernetesServices\K8S>az aks get-credentials -n k8scluster -g K8SGroup
+Merged "k8scluster" as current context in C:\Users\r1m1nrao\.kube\config
+
+7. # Verify the kubectl configuration 
+kubectl config view
+
+D:\Hexa-FSD-Batch-4\Kanchan\KubernetesServices\K8S>kubectl config view
+apiVersion: v1
+clusters:
+- cluster:
+    certificate-authority-data: DATA+OMITTED
+    server: https://k8scluster-k8sgroup-cb76f6-7c989683.hcp.southeastasia.azmk8s.io:443
+  name: k8scluster
+- cluster:
+    certificate-authority-data: DATA+OMITTED
+    server: https://rupaliaksc-aksgroup-4e9644-94f8a556.hcp.southeastasia.azmk8s.io:443
+  name: rupaliakscluster
+contexts:
+- context:
+    cluster: k8scluster
+    user: clusterUser_K8SGroup_k8scluster
+  name: k8scluster
+- context:
+    cluster: rupaliakscluster
+    user: clusterUser_AKSGroup_rupaliakscluster
+  name: rupaliakscluster
+current-context: k8scluster
+kind: Config
+preferences: {}
+users:
+- name: clusterUser_AKSGroup_rupaliakscluster
+  user:
+    client-certificate-data: REDACTED
+    client-key-data: REDACTED
+    token: d78e6879e445fc486296bf2f675384fd
+- name: clusterUser_K8SGroup_k8scluster
+  user:
+    client-certificate-data: REDACTED
+    client-key-data: REDACTED
+    token: b0WeDWaZ5bFOAjMrvSK5lsZNH0qNdd04baMgZN9oBu0Qyyr2SMkbh30r7QEXkGJHShzjkHUD8xVMBAS69Ho3KKwaOGbeY3wvWANbH7yZl08pujSixKsIkBCsSMv7zCF2
+
+8. # List the nodes
+kubectl get nodes
+
+D:\Hexa-FSD-Batch-4\Kanchan\KubernetesServices\K8S>kubectl get nodes
+NAME                       STATUS   ROLES   AGE   VERSION
+aks-nodepool1-32663181-0   Ready    agent   32m   v1.13.10
+aks-nodepool1-32663181-1   Ready    agent   32m   v1.13.10
+aks-nodepool1-32663181-2   Ready    agent   32m   v1.13.10
+
+
+9.  Do following steps or refer K8S folder
+
+	#Deploy insurance service
+kubectl apply -f ./yaml/insuranceportal-service.yaml
+
+# Create file insuranceportal-deploy file then deploy (newly deploy)
+kubectl apply -f ./yaml/insuranceportal-deploy.yaml
+
+# Update chnages the use
+kubectl replace -f ./yaml/insuranceportal-deploy.yaml
+
+==================================================================
+
+Deploy microservice
+1. Create images using docker command
+2. Push images to dockerhub
+	docker push <imagename>
+3. Create Group 
+	# Create a resource group
+az group create -n K8SGroup -l centralindia
+
+4. cluster
+	# Create Kubernetes clusters
+az aks create --name k8scluster --location southeastasia -g K8SGroup --enable-addons monitoring --generate-ssh-keys  --node-count 2
+
+
+5. # Authenticate to K8S cluster
+az aks get-credentials -n k8scluster -g K8SGroup
+Overwrite if required
+
+6. Confirm 2 instances are running or not 
+	# List the nodes
+kubectl get nodes
+
+
+7. Now First deploy database (which is sql server ) 
+	1. Create the secrete
+		#Create SQL Server 
+			kubectl create  secret generic mssql --from-literal=SA_PASSWORD="Password@123"
+
+		#Confirm above step 
+			kubectl get secret
+
+8. Refer event-scripts.azcli file 
+	Note : create yaml file before deploy command 
+-----------------------
+
+Now deploy Event api
+9.
+Refer event-scripts.azcli file 
+
+NOte: if you want to merge service and deploy yaml add seperator as "---" 3 hypens.
+
+------------------
+
+10. Now deploy Identity api 
+
+Follow step 8 or 9 
+
+---------------------
+
+
+YOu can see everything using 
+
+az aks browse  -n k8scluster -g K8SGroup
+
+but you will not see anything as it admin portal, but if you want see you need to rollback.
+
+create a dashboard-admin.yaml file (Fix file- no need to modify) 
+
+
+
+
+
+
+

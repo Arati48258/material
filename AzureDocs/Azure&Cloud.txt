@@ -1,0 +1,670 @@
+Topic : 
+1. On-premise server 
+2. Resource Group in Azure
+3. Storage Account
+4. SOA 
+5. Service Bus, TTL 
+6. Replication  
+7. 
+
+
+
+Links 
+>https://www.bmc.com/blogs/saas-vs-paas-vs-iaas-whats-the-difference-and-how-to-choose/
+>https://azure.microsoft.com/en-us/
+>https://azure.microsoft.com/en-us/global-infrastructure/regions/
+> https://azure.microsoft.com/en-us/free
+> Azure Services
+	https://docs.microsoft.com/en-us/rest/api/azure/
+> Azure SDk 
+	https://azure.microsoft.com/en-us/downloads/?sdk=net
+> Github publish
+	https://wpism.com/publish-local-project-github-command-line/
+> Scaling app
+	https://docs.microsoft.com/en-us/azure/azure-monitor/platform/autoscale-get-started?toc=%2fazure%2fapp-service%2ftoc.json
+
+> Deployment slots
+	https://docs.microsoft.com/en-us/azure/app-service/deploy-staging-slots
+	1. Staging
+	2. Swapping -
+		1. Manual 
+		2. Auto Swapping
+
+Microsoft Azure 
+-----------------------
+Azure speed - 150mb/s
+	Why?
+		On-premise data centers?
+		Cons: 		
+			-Infrastructure cost
+			-Backup
+			-Diaster recovery
+			- Security and compliance	
+			-Scaling (time for scaling is high)
+			- Global reach (lattancy)
+
+		-Cloud
+			-Pooled resources
+			-Security and Copliance is built-in
+			-built-in Backup
+			-DR as a service
+			-Scale in seconds
+			-Global reach and georeplication
+			-Pay per Use(pay as you go)
+			-automatic monitorin and auditing (alerts)
+
+
+
+	What?
+		-Cloud is as set of interconnected datacenters with pool of resources that can be accesible over internet.
+		-Cloud Types:-
+			-Private:-Cisco, HP
+			-Public :-Azure, AWS, google Cloud
+			-Hybrid
+		-Cloud Service Models:-
+			-IaaS - Infrastructure as a Service:
+			    -Cloud vendor is providing infra such as network,virtual machine(computer), storage (disk),firewall , IP address
+			    -IT pro (Admin) will be using  such services.
+
+			-PassS -Platform as Service:
+			      -Preconfigured Platform
+			      -Developers
+
+			-SaaS   -Software as Service:
+			       -Software as a Service
+			       -Office 365,dyanmic CRM,One Drive,GoogleDrive,Gmail,Skype
+				
+	How?
+	          Microsoft Azure
+		-->Data Center/Regions/Location
+		       -54+ Regions
+		       -India we have 3 data center: South,Central and West
+			-South- Chennai
+			-West- Mumbai
+			-Central - Pune
+		       -Other DataCenters
+			-US- EastUS , East Us2 , West Us, South Central Us
+			-Brazil, SouthEast Asia (Singapore),East Asia (Hongkong)
+			-Azure has datacenters in China, but they are accesaible to only to chinese
+			-Germamy ,US Governmnet
+
+		-->Subscriptions
+			-Agreement Between customer and microsoft.
+			-Subscription Types:
+				-Pay As You Go
+				-Enterprise agreement
+				-free subscriptions:
+					-Free trail
+					-Recurring subscriptions (for Microsoft certified peoples)
+
+		-->Deployment Model
+		      	-Azure Resource Manager Model (ARM Model)
+		     	-Resouce Group
+				-Logic grouping of one or more services.
+		-How to work with Azure?
+			- Iaas -VM, VNET, IP, Disk, Traffic Manager, Application Gateway, VMSS, Availabilty set.
+			- Paas - AppService,FunctionApp, Logic App, AKS, API Gateway, ACI, SF, Storage Account, CosmosDB, SQl Database
+			- SaaS
+
+		-How to Connect and Create Azure Services?
+			- Web portal (https://portal.azure.com)
+				It is typically used by beginners as they are not aware of commands 
+				Provide a UI for creating and managing services.
+			- Command Line Tools
+				- Primarily used by IT Pro
+				Powershell
+					- Powershell Version > 5.0
+					- Primiraly for windows server
+					- Now PowershellCore is available for Linus also.
+					- Powershellcore is cross platform
+		
+				Cross Platform Command Line(Azure CLI)
+					Supports
+	
+					- Windows
+					- Linux
+					- Mac
+				Azure SDK
+					- Used by developers
+					- SDK is availble for all alnguages such as .NET, Python, Nodejs, Java, PHP etc...
+					- Through programming developers can manage , delete resources
+
+				ARM Templates
+					- These are JSON templates
+					- It is a declarative way of creating resources.
+					- Provide a better reusability 
+					- Single command can be used to create group of resources
+				RESTful Services
+					- Everything (creating a VM, etc ) is a RESTful Service
+					- Coz of this we are able to execute using Powershell command, or using Azure SDK
+					- All instructions are executed in azure as REST Services.
+					- When we use SDK, Powershell, CLI, ARM Template they always make a request to REST call.
+					- Developers can also make direct call to RESTful services.
+	----------------------------------------------------------------------------------------------------
+
+	POWERSHELL Commands
+	
+				- Start and then Search for Powershell ISE
+				- Login to Azure account (Verify all necessory Powershell )
+					- Go to http://azure.microsoft.com (It is Azure website) for docuementation.
+					- To downlaod Azure SDk (https://azure.microsoft.com/en-us/downloads/?sdk=net)
+					- Install Powershell if it not present 
+						https://docs.microsoft.com/en-us/powershell/azure/install-az-ps?view=azps-2.5.0&viewFallbackFrom=azps-1.2.0
+						For current user use below command
+						Install-Module -Name Az -AllowClobber -Scope CurrentUser
+
+					- Install Azure CLI 
+						https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest
+							Downlaod MSI installer
+
+					- Check powershell version 
+						$PSVersionTable.PSVersion (F8 to execute)
+
+
+				- Check Azure CLI command version
+					Open normal command prompt 
+					Command: az --version
+					- All Azure CLI commands start with 'az'
+
+				-
+				
+-----------------------
+Powershell 
+		Login and close- session is over
+Azure CLI	
+		Storing a crentials in cache file 
+
+-----------------------
+
+		Go to Azure Portal (https://portal.azure.com/#home) -> Near Search window there is cloud Shell
+		- Select Bash
+		- Create Storage
+		
+-----------------------
+
+Commands
+# All commands for Powershell
+
+
+#$PSVersionTable.PSVersion
+
+#Install-Module -Name Az -AllowClobber -Scope CurrentUser
+
+#Install-Module -Name Az -AllowClobber -Scope AllUsers
+
+#1.Login
+
+Login-AzAccount
+
+#2. Will give you list of Resources
+Get-AzureRmResourceGroup  
+
+#3. To create Resource Group
+New-AzureRmResourceGroup -ResourceName 'MyPowerShellRG' -Location 'South India'
+
+
+--------------------------------------------------------------
+
+Bash Commands
+
+	1.  az group list -o table
+
+	Output
+	kanchan@Azure:~$ az group list -o table
+Name                              Location      Status
+--------------------------------  ------------  ---------
+cloud-shell-storage-centralindia  centralindia  Succeeded
+HexawareGroup                     centralindia  Succeeded
+MyPowerShellRG                    southindia    Succeeded
+
+	2. az group create -n MyCLIRG -l centralindia
+
+	Output : 
+	kanchan@Azure:~$ az group create -n MyCLIRG -l centralindia
+{
+  "id": "/subscriptions/cb76f6aa-5db0-49ae-a1cb-d9cfdc67a993/resourceGroups/MyCLIRG",
+  "location": "centralindia",
+  "managedBy": null,
+  "name": "MyCLIRG",
+  "properties": {
+    "provisioningState": "Succeeded"
+  },
+  "tags": null,
+  "type": null
+}
+
+	3. az group delete -n MyPowerShellRG
+		Are you sure you want to perform this operation? (y/n): y
+
+--------------------------------------------------------------
+
+			ARM Template 
+				-Github account
+				- Search for "azure quickstart templates github"
+				- https://github.com/Azure/azure-quickstart-templates
+					Find -> vm-simple-windows
+					Go inside this folder
+						2 files-
+						azuredeploy.json
+						azuredeploy.parameters.json (will have paramter value)
+						- Save these files in a folder
+
+-----------------------------------------					
+Command to create ResourceGroup and deploy 
+	New-AzureRmResourceGroupDeployment -Name "MyDeploy" -ResourceGroupName "HexawareGroup" -TemplateFile "Path of azuredeploy.json" -TemplateParameterFile "azuredeploy.parameters.json"
+
+					- Difficult level 
+						100 -(Begginer) - very simple,
+						200 - Average - Intermident
+						300 - 
+						400 - PoC (Real time scenario)	
+
+
+
+	
+-----------------------------------------
+		
+Que: How to create ResourceGroup?
+
+1. Portal  (For Beginner)
+
+2. Powershell/ Bash
+
+3. SDK  (developers)
+
+4. ARM Templates
+
+5. Restful Services
+
+
+-----------------------------------------
+
+		-Storage Account
+			- One of the primary storage service in Azure.
+			- Storage options in Azure storage account
+				1. Blob Storage
+					-Used for storing unstructured blob files such as audio, video, images,text files, documents, executables etc	
+					e.g: Youtube storage
+				2. File share
+					-Simillar to blob, but it uses an SMB3.0 protocol to map the fileshare as a network drive in our personal machine.
+					
+				3. Queue
+					-When there is a offline communication is required then queue can be used. 
+					- Queue is used to implement app-app integration using text messages.
+					- Supports offline communication
+					- One to many messaging with offline communication feature.
+					- For storage queue, One message size is maximum 64 KB (Service Bus queue can have up to 256 kb)
+					- For storage queue, TTL (Time to Leave) for message 7 days (Service bus TTl is 14 days)
+					- For storage queue, FIFO is not guaranteed (SB queue FIFO is guaranteed)
+					- Partitioning of Message is not possible ( SB queue supports it)
+						Send message in chunks/ packages)
+					- Dead later queue 
+						- Message which are not consumed can be not passed to next queue. 
+
+
+				4. Table
+					- It is not a relational database table, it is No Sql data storage in Storage account
+					- Store the data in Key-Value pair
+					- Every record in the table is called Entity.
+					- Every entity must have RowKey and PartitionKey
+					- Every entity will have TimeStamp value also.
+					- Every entity can have maximumof 256 attribute (Keys) 
+						-256 -3 = 253 key
+						3 Reserved keys for every table
+						- RowKey - 
+							-It is used for uniquely identifying key within a sepcific Partition
+						- PartitionKey -	
+						- TimeStamp
+							Creation data and time (automatic)
+					e.g.
+
+						1000 Sales data
+						SalePersonId, Amount, Region, No of customers
+
+						South
+							101, 2000, South,5
+							106, 2000, South,2
+						North
+							107, 5000, North,4
+							101, 2000, South,5
+
+						East
+						West
+
+
+-----------------------------
+	Create a Storage Account
+	1. Go to Portal
+	2. Create storage account(https://portal.azure.com/#create/Microsoft.StorageAccount)
+		- Your ResourceGroup
+		- Storage account name (unique cross the azure) - It is actual part of URL.
+		- Location 
+		- Performance -Select -> Standard (Premium is paid)
+		- Account kind - Select -> Blob Storage
+			3 type 
+				-V1 
+					-Performance : Standard + Premium
+					-Access Tier : not available 
+					-All 4 Service models available ( Blob + file + queue + table)
+				-V2 
+					
+				-Blob
+					- Performance : Only Standard
+					- Access Tier : Hot + Cool
+						Cool - Frequently not used data
+						Hot - Frequently used data, fast access (Combination of V1 + Blob)
+						Access Tier is ideal for frequently accessed data, and the Cool Access Tier is ideal for infrequently accessed data. The Archive Access Tier can only be set at the blob level and not on the account. 
+					- Only Blob is available 	
+
+		3. Once it is created 
+		4. Click on Container (lowercase name) 	Container means folder
+
+			-Name : Root Storage Palce
+			- Access Policy 
+				3 policies
+				- Blob
+					You can anonymously access files (blob) without any key or token 
+					Use the file URL to access it
+					URL : https://<storageaccountname>.blob.core.windows.net/<container>/<file>
+					Directoty browsing is not allowed. (listing option)
+				- Container
+					You can anonymously access files (blob) without any key or token 
+					Blob listing (Directory browsing ) is supported
+
+				- Private
+					You can not anonymously access files
+					Need an access token to access file
+					It is secure than other modes
+			Name : myfiles
+			Access policy : Private 
+			
+
+		5. Upload files
+			Try to access 
+				https://kanchanstorageaccount.blob.core.windows.net/myfiles/th1.jpg
+			<Error>
+			<Code>ResourceNotFound</Code>
+			<Message>
+			The specified resource does not exist. RequestId:3734ef03-f01e-0031-475e-568dac000000 Time:2019-08-19T07:20:28.8258570Z
+			</Message>
+			</Error>
+			
+			Change the access level using "Change Access Level" option 
+
+		6. Credentials
+			Access Keys
+			Token 
+				Accept token 
+
+			-Shared access signature 
+				- Allowed Service 
+					-Select - Blob
+				-Allowed Service type
+					- Select Container and object
+					- The permissions for the account SAS. Permissions are valid only if they match the specified allowed resource type; otherwise, they are ignored.
+				- Start and expiry date/time: (7 days) 
+						the start and end date/time during which the account SAS is valid.
+				- An IP address or range of IP addresses from which to accept requests. 
+					- It is Optional
+				-Allowed protocol 
+					-The protocols permitted for a request made with the account SAS. We recommend allowing requests over HTTPS only.
+				- Signning key 
+				
+				-Click on Generate SAS and connection string
+					https://kanchanstorageaccount.blob.core.windows.net/myfiles/th1.jpg
+					+ SAS Token -
+					?sv=2018-03-28&ss=b&srt=co&sp=r&se=2019-08-26T15:29:26Z&st=2019-08-19T07:29:26Z&spr=https&sig=PPnj8Oon%2Bp5v%2Bf7AvUvscfUxseLuKEZZkLKPcF%2BmXMU%3D
+				- Now this will not give error while accessing as we are passing token 
+				- This token is valid for limited period.
+
+
+-----------------------------------
+
+			7. File Share
+
+
+			Go to Files -> File Share (Mouting a Network drive)
+				Name (mydocs) and Quota (50 GB)
+				Click on mydocs
+					-> create -> copy the Windows command 
+					
+-----------------------------------
+
+			8. Queue 
+				
+				- Add new queue -> Order-queue
+				- Click on newly created queue -> then Add Message and Expiry
+
+
+-----------------------------------
+			9. Tables
+				-Create Table - Add New Table (Employees)
+				- To add record-> go  to Storage Explorer (left menu) 
+
+				- Select -> Table -> EMployees -> Add Entity-> 
+				
+
+
+
+
+
+---------------------------------------------------------------------------------------------
+
+Replication 
+	Every data center doesn't have swarn (zone) 
+	-LRS - Locally redundant
+		- Less costly and less secure
+		
+	ZRS  - Zone redundant
+
+	GRS - Geo Replication 
+		- Primary in India then secondary will be around 500 miles .
+		- More costly and more secure
+		- Every read/write operation happened in Primary, eventhough secondary is avaible near to the accessing location it will read from primary only
+		- 
+	RA-GRS - Read access Geo Replication 
+		- Highest costly 
+		- Read operation can be done with nearest data center , but write will happen primary only.
+
+
+
+- Inside 1 subscription you can create 200 Storage Account
+	byDefault - 200 
+1 Storage account 
+	500 TB
+----------------------------------------------------------------------------------------------------------
+				
+-Blob
+	-container-Root Storage place
+	-container access policy
+		-Blob
+			-You can anonymously access files (blob) with out any key
+			 or token
+			-Use the file URL to access it
+			-Url:https://<storageaccname>.blob.core.windows.net/<containers>/<file>
+			-Directory browsing is not allowed.
+		-Container
+			-You can anonymously access files (blob) with out any key or token
+			-blob listing (Directory Browsing ) is supported
+		-private
+			-anonymous access not allowed
+			-Need an access token to acces files
+			-It ias an secure than other modes
+		=-Credintials
+			-access key
+			-Token (SAS) shared folder
+
+***************************************************
+
+WindowAzureStorage install in visual studio
+
+**********************************************
+-App Service
+	-This is a Compute services used to deploy the web applications on Azure.
+	-App Service
+		-Web app
+			-web applications including ASP.NET,MVC,Java,PHP,NodeJs etc.
+		-API App
+			-User to deploy REST and WebService Applications
+		-Mobile App
+			-Used to deploy the mobile application backend services
+	-PaaS Services configured with all kinds of languages and fraemworks
+	-Web App
+		-Unique Web app Name:
+		-https://<webappname>.azurewebsites.net-->https://hexaware.com
+		-Location-where to deploy
+		-App Service Plan
+			-pricing model
+			-Instance Suze (VMSize)
+		-Application Insights (Monitoring tool)-optional
+		-Pricing Model
+			-free
+			   -No Cost
+			   -No SLA
+			   -Dev and Test
+			   -No Dedicated machine (Using shared machine)
+			   -No Custom Domain
+			   -No Deployement slots
+			-Shared
+			   -Custom domain mapping		
+			   -Not Free (a minor amount to be paid)
+			-Basic
+			   -Dedicated machine (A series VM)
+			   -SLA 99.99%
+			-Standard (Recommended for production)
+			   -5 Deployment alots
+			   -Backup daily 10 times
+			   -Traffic manager
+			   -S1, S2(2 CPU WITH 2), S3(7 GB RAM WITH CORE)
+			-Premium
+			   -20 deployment slots
+		   	   -Daily 50 Times backup
+			   -P1, P2 ,P3 (A Series VM) ->PIV2, P2V2, P3V2 (D Series VM)
+			-Isolated (ASE)
+				-Creating the App Service VM in a dedicated (isolated) network.
+		-Deploy Web app
+			-Visual Code Publish
+			- VS Code (AppService Extension)
+			- FTP 
+			-Deployment Center (CI/CD)
+
+Git commands
+	1. Open Cmd and go to project location 
+	2. git init
+	3. git add.
+	4. git commit -m "InitialInsuranceClient"
+	5. git push -u origin master
+
+git remote add origin https://github.com/kanchanbhong/insuraceapp.git
+
+	
+https://wpism.com/publish-local-project-github-command-line/
+
+To Delete Repository in gihub 
+	- delete published project from github
+	- https://help.github.com/en/articles/deleting-a-repository
+
+
+
+
+-Scaling
+	https://docs.microsoft.com/en-us/azure/azure-monitor/platform/autoscale-get-started?toc=%2fazure%2fapp-service%2ftoc.json
+
+	-Scale Up (Vertical Scaling)
+		-Increase the size of the VM
+		- Increase the SKU (s1->s2) (S1 -> P1) (B1 -> S2)
+	-Scale Out (Horizontal Scaling)
+		- Increase the number if instances.
+		- This automatically creates a LB to distribute the requests to all instances.
+		- 2 Ways
+			1. Manual scaling
+			2. Automatic Scaling
+				- Need to specify scaling conditions (e.g. disk usgae more 50%, CPU usgae is 50%, number of messages coming to the queue etc...) 
+				- Scaling condition is applied based on a metric
+					-Internal metrics example 
+
+						- CPU percentages
+						- Disk utilization
+						- Http Request 
+						- Messages in Storage queue or Storage Bus queue
+
+
+- Deployment Slots
+
+	https://docs.microsoft.com/en-us/azure/app-service/deploy-staging-slots
+
+	-Deployment slots allows you to create staging environment or testing environment for your application.
+	- By default only Production is available.
+	- we can create one or more slots for staged deployment and testing
+	- Once the deployment is done in staging slot we can do a virtual swapping
+	- Swapping can be manual swapping or auto swapping
+	- Pros : 
+		- Downtime is very less
+		- 
+	Staging 
+		- It is also cloud deployment
+		- But customer is not aware of  this.
+	Swapping 
+		-Manual
+		- Automatic
+			-Go to staging -> Configuration -> Go down -> Deployment Slot -> Auto Swap enabled (ON) -> Auto swap deployment slot ( Production) 
+		
+				
+	Testing Slot
+		- For testing purpose
+
+
+-Deployment Center
+	https://docs.microsoft.com/en-us/azure/app-service/deploy-continuous-deployment 
+
+	- By default github publish to Production, so go to Deployment Center and disconnect Production 
+
+- Stop 
+	App Service
+	- We are stoping application means machine is still running (not down) , there are other machines may be working
+	- As we are paying for machine.
+		
+
+
+****************************************************************************
+App Service in Azure Portal 
+
+Go To Azure Portal 
+1. Create New App Service
+	ResourceGroup 
+		-your resource group in which you want to deploy
+	Instance Details
+		Name : "insuranceclient"
+		Publish : code
+		Runtime : .Net core 2.2
+		OS: Windows
+		Region : []your choice] 
+		Review & Create
+2. Open newly created App service
+
+3. Go to Deployment Center -> 
+	- Source Control -> GitHub (Autorize) -> Login your github account
+	- In Build Power -> click continue 
+	- Configure 
+		Organisation -kanchanbhong
+		Repository -InsuranceApp (Github source code repository name)
+		Branch - master
+	- Summary 
+		sample
+			SOURCE CONTROL
+				Repositoryhttps://github.com/kanchanbhong/InsuranceApp
+				Branchmaster
+				BUILD PROVIDER
+				ProviderApp Service build service
+
+	-Click on Finish button
+	- 
+
+
+		
+
+
+
+
+
+	

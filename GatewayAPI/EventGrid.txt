@@ -1,0 +1,5 @@
+Event Grid
+--------------------
+
+- Communication strategies
+	-

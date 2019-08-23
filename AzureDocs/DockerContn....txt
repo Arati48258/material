@@ -1,0 +1,107 @@
+Topics 
+1. Docker compose : used for multicontainer deployments (SQL server, Event API, Identity API)
+2. Docker swam
+3. Orchastrator
+4. 
+
+
+DOcker compose up
+	single command for create and start
+
+
+
+
+XML	
+	- Tab based 
+json 
+-	{}
+
+- Docker we use declarative command 
+- Within 1 yaml file 
+
+-Docker compose
+	This is called as multicontainer deployment.
+	- means we are deploying 1 or more container in one go
+	- Uses a declarative model with YAML file 
+	- Yaml file extension can be .yaml or yml
+	- Docker compose yaml file name is 'docker-compose.yaml'
+	- Optionally we can use a .env fine to define the environment variables values, coz yaml is very large configuration file
+	- Docker compose is used where we use docker swarm.
+	- 
+-----------------------------------------------------------------------------------------
+	Orchastrator
+	One of the machine is down it is orchastrator duty to restart the machine,
+	-Doing scalling
+	used to manage application within orcht
+	clucture- group of interconnected machines for deployment.
+	-types
+		Docker swarn - Docker-compose.yml		
+		Kubernetes- Kubernetes yaml
+		CD/OS
+
+-----------------------------------------------------------------------------------------
+
+1. Create Dockerfile for EventAPI and IdentityAPI
+2. Create new file Docker-compose.yaml
+	2 Sections
+	1. networks section 
+		2 netwroks 
+			-frontend 
+			- backend
+
+	2. Service section
+		-Deploy containerized application
+		- 3 service
+			1. mssql -# Service name is mssql, it is not container name
+				image: mcr.microsoft.com/mssql/server:2017-latest-ubuntu # when you execute this command it will try to create new container using this image
+
+			- If you have multiple instances of services then you can add below lines -	
+				deploy:
+					replicas:2
+			- All requests are coming through service name, no container accept 
+
+	
+			2. identitysvc
+			3. eventsvc		
+	
+	3. create a .env file to set the value for Environment variable
+		SQL_PASSWORD = Password@123
+		ACCEPT_LIECENSE = Y
+
+	4. Run in cmd 
+		docker-compose up
+
+
+
+=============================================================================
+
+	Docker Repository
+		-You have to follow a naming convention
+		- image name should be 
+			<dockeraccountid>/<imagename>:<tag>
+			e.g. kanchanbhong/eventmanagement:latest
+
+		docker tag <original image name> <alias name> // It is give different name but id is same.
+			e.g : docker eventmanagement:latest kanchanbhong/eventmanagement:latest
+
+		docker push kanchanbhong/eventmanagement:latest
+			-May give you exception, so do login 
+		docker login
+
+			-------------------------------------------
+		D:\Hexa-FSD-Batch-4\Microservices>docker login
+		Login with your Docker ID to push and pull images from Docker Hub. If you don't have a Docker ID, head over to https://hub.docker.com to create one.
+		Username: kanchanbhong
+		Password:
+		Login Succeeded
+
+		-------------------------------------------------------------------------
+
+
+		## Event Management
+
+		This is a sample event management application. You need to run the sql server container before runnin this application.
+
+		### How to run?
+		`docker run -p 5000:80 --name "eventmgmt" -d kanchanbhong/eventmanagement:latest`
+

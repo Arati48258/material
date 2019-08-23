@@ -1,0 +1,41 @@
+Storage Service
+
+---------------------------
+
+1. Create MVC application- Insurance Client
+2. Create Model-> Customer
+3. Base class for Customer is TableEntity
+4. for this download Nuget Package as "windowsazure.storage", install this package for your solution 
+5. Inherit TableEntity in Customer class 
+	 public class Customer:TableEntity
+    {
+
+    }
+
+	and create other properties
+
+6. go to HomeController.cs
+7. Create ViewModel folder in the Model and add CustomerViewModel
+8. Create a view for customerViewModel View
+	View Create
+	name : Create
+	Template : CustomerViewModel 
+
+9. In View add this for image 
+	enctype="multipart/form-data" for form tag.
+
+10. Save Form Data 
+	
+
+11. Get the Connection string 
+
+Portal -> StorageAccount-> Select account then Access key -> copy connection string from key1 section
+
+
+=====================================================================================================
+
+App Service 
+
+--------------------------------
+
+

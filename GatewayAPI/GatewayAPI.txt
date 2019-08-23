@@ -1,0 +1,109 @@
+Azure API Management Gateway (API Gateway)
+
+
+Links
+https://docs.microsoft.com/en-us/azure/api-management/get-started-create-service-instance
+
+What?
+Why? 
+
+Once application is deployed in server we can modify below things ( need re-dployment)
+Challenges in API deployment
+	- List of URL's (In Microservice we are creating new URL for all API's)
+	- Security -> Have to implement for all API's 
+	- Monitoring -> need to implement for all API's
+	- Restriction (caching can not be implemented after deployment)
+	- Request limiting/ Throthling -can  we implement in Azure Services? -> NO
+	- Mocking of Services - Not already implemented, can we redeploy
+	- Response confirmation/ transformation is not happening after deployment
+		- Currently only json is the supoorted type but client want it in xml, that is not posible without code change and re-deployment
+	- Set Header values/ Remove headers
+- 
+
+How to handle challenges-
+	- We can use an intermediate component/ service called API gateway.
+	- Every request for API 
+	-
+
+Architecture of gateway/ Components 
+	1. Publisher Portal 
+		-Azure Portal is now providing all functionality of Publisher portal
+		- API publisher can configure the policies for operations, APIs and products
+		-View all subscription requests and he can approve or cancel it.
+	2. Developer Portal
+		- Developer (Consumer of API) can send subscription request for accessing API
+		- Once the publisher approves the request, developer will get a subscription key.
+		-Subscription key need to be supplied with every request he makes to the API gateway
+		Ocp-Apim-Sunscription-key
+	3. Gateway
+		- It is component that provides all features required for the API.
+		- We will be implementing set of policies.
+		- 	eg: How caching, request transformation is happeing
+		- Different policies
+
+			- Caching policy
+			- Cors policy (security)
+			- Mocking policy
+			- Transformation policies
+			- Set Header policy 
+			- Jwt token validation policy (security)
+
+		-
+
+===============================================
+
+What is Product / API/ Operations
+
+	- Product
+		- Logical grouping of API (EShop)
+			-API
+				-CatalogAPI 
+			- Operations
+				- means API functions 
+				- GetAll(), GetById()
+		
+
+-------------------------------------------------------------
+
+Transfer-Encoding: chunked
+Date: Fri, 23 Aug 2019 09:44:36 GMT
+Content-Type: application/json; charset=utf-8
+
+{
+  "firstName": "kanchan",
+  "lastName": "bhong",
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJrYW5jaGFuIiwiZW1haWwiOiJrYW5jaGFuYmhvbmdAZ21haWwuY29tIiwianRpIjoiYmM5Nzk0ZTQtMWMyZi00OGY5LThkMjMtMjVkNDVlNTlhN2M1IiwiYXVkIjoiZXZlbnQiLCJleHAiOjE1NjY1NTUyNzUsImlzcyI6ImlkZW50aXR5In0.G9c3mBgepPsVEKWbt1MWZWBsjNi0UI1l2FZI7_xGQis"
+}
+
+Transfer-Encoding: chunked
+Date: Fri, 23 Aug 2019 10:05:23 GMT
+Content-Type: application/json; charset=utf-8
+
+{
+  "firstName": "kanchan",
+  "lastName": "bhong",
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJrYW5jaGFuIiwiZW1haWwiOiJrYW5jaGFuYmhvbmdAZ21haWwuY29tIiwianRpIjoiZDk3ODZiNmMtOTAyZC00NTg4LWE5MzAtYTdhZWZjYzE0NWYxIiwiYXVkIjoiZXZlbnQiLCJleHAiOjE1NjY1NTY1MjMsImlzcyI6ImlkZW50aXR5In0.gEmxGVRUNz8-0o2MLygNGRuI6NlJCqhnI6Z5Blv4sHY"
+}
+
+
+Policies
+-------------------------------
+
+Caching 
+	- Internal - InMemory cache
+	- External 
+	- Prefer-External - If external caching is avaialbel then will do external
+
+Set Cors policy 
+
+
+Where you can add/delete 
+	In Outbound Procesing policies
+
+Que: Can we use Gateway for our service? Yes
+
+
+
+
+
+

@@ -1,0 +1,14 @@
+D:\Batches\Batch Demos\Hexaware-Mum-Batch4\Microservices\EventAPI\EventAPI\bin\Debug\netcoreapp2.2\EventAPI.deps.json
+D:\Batches\Batch Demos\Hexaware-Mum-Batch4\Microservices\EventAPI\EventAPI\bin\Debug\netcoreapp2.2\EventAPI.runtimeconfig.json
+D:\Batches\Batch Demos\Hexaware-Mum-Batch4\Microservices\EventAPI\EventAPI\bin\Debug\netcoreapp2.2\EventAPI.runtimeconfig.dev.json
+D:\Batches\Batch Demos\Hexaware-Mum-Batch4\Microservices\EventAPI\EventAPI\bin\Debug\netcoreapp2.2\EventAPI.dll
+D:\Batches\Batch Demos\Hexaware-Mum-Batch4\Microservices\EventAPI\EventAPI\bin\Debug\netcoreapp2.2\EventAPI.pdb
+D:\Batches\Batch Demos\Hexaware-Mum-Batch4\Microservices\EventAPI\EventAPI\obj\Debug\netcoreapp2.2\EventAPI.csprojAssemblyReference.cache
+D:\Batches\Batch Demos\Hexaware-Mum-Batch4\Microservices\EventAPI\EventAPI\obj\Debug\netcoreapp2.2\EventAPI.csproj.CoreCompileInputs.cache
+D:\Batches\Batch Demos\Hexaware-Mum-Batch4\Microservices\EventAPI\EventAPI\obj\Debug\netcoreapp2.2\EventAPI.RazorAssemblyInfo.cache
+D:\Batches\Batch Demos\Hexaware-Mum-Batch4\Microservices\EventAPI\EventAPI\obj\Debug\netcoreapp2.2\EventAPI.RazorAssemblyInfo.cs
+D:\Batches\Batch Demos\Hexaware-Mum-Batch4\Microservices\EventAPI\EventAPI\obj\Debug\netcoreapp2.2\EventAPI.AssemblyInfoInputs.cache
+D:\Batches\Batch Demos\Hexaware-Mum-Batch4\Microservices\EventAPI\EventAPI\obj\Debug\netcoreapp2.2\EventAPI.AssemblyInfo.cs
+D:\Batches\Batch Demos\Hexaware-Mum-Batch4\Microservices\EventAPI\EventAPI\obj\Debug\netcoreapp2.2\EventAPI.RazorTargetAssemblyInfo.cache
+D:\Batches\Batch Demos\Hexaware-Mum-Batch4\Microservices\EventAPI\EventAPI\obj\Debug\netcoreapp2.2\EventAPI.dll
+D:\Batches\Batch Demos\Hexaware-Mum-Batch4\Microservices\EventAPI\EventAPI\obj\Debug\netcoreapp2.2\EventAPI.pdb

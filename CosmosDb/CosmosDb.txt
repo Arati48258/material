@@ -1,0 +1,225 @@
+TOpics
+1. Cosmos DB SLA
+2. Create CosmosDb account
+3. RU Calculator
+	https://cosmos.azure.com/capacitycalculator/
+
+Imp Links
+1. SLA for Cosmos DB
+	https://azure.microsoft.com/en-us/support/legal/sla/cosmos-db/v1_3/
+
+
+2. Cosmos DB Emulator is used while development as CosmosDB RU is costly.
+	hhttps://docs.microsoft.com/en-us/azure/cosmos-db/local-emulator
+
+IF we going for Migration then always go for sql api
+
+
+Cosmos DB
+	- Database Service on cloud
+	-Cosmos db is Palnet scale, geo distributed, multi-model database
+		multi-model -> you can store multiple type of data in single database. 
+
+	- While creating a CosmosDB account we can specigy the type of API need to be used.
+		You can store below types of database in Cosmos DB
+		-MongoDb
+		-DocumentDB (SQL API or Core API)
+		-Cassandra
+		-Grmlin
+	-Geo-Replication 
+		-Replication to one or more locations in a single click.
+
+	-SLA
+		-All other Azure services provides SLA of 99.99% for high availablity, Not giving gurantee on Performance, latency 
+		- Cosmos DB offers 99.999% SLA for both read and write availability
+		-Cosmos DB is only service that provides SLA for 4 parameters-
+			-High Availabilty
+			-Throughput
+			-latency 
+			-Consistency
+		- It uses High Speed SSD disk for storage.
+		-Cost is little high compare to other databases.
+	
+	-Throughput
+		RU - Request Unit
+		-Read
+
+			1 RU - One read operation of one data of 1 KB
+			e.g. 100 request / sec then 100 RU
+		-Write 
+			
+		-Delete
+				
+
+	- No Sql database service
+		-Document 
+			MongoDB
+			DocumentDB
+		- Key-Value
+			-Azure Table
+		- Graph database
+			Gremlin
+		- Column family
+			Cassandra
+
+
+Why ? 
+	When we deploy service on cloud then your database should be cloud, it is better to have database in cloud
+	-> MongoDB, Gremlin, Cassandra can not be in cloud (On -premise data) 
+====================================================================================================================================
+
+How to crete Cosmos DB account?
+1. Azure Portal
+2. Database -> Azure Cosmos Db 
+3. Add 
+	ResourceGroup
+	AccountName: kanchan-mongoapi
+	API : Azure Cosmos DB for MongoDB API
+	Location : Any (Primary Database) 
+		-You can enable Multi-region DB then any write operation will be done at any locations
+4. Next: Network 
+	Question : How to restrict data access from public netwrok used Virtual network 
+	Configure Virtual Network 
+		Virtual Network 
+		Subnet 
+5. REview & Create
+
+---------------------
+
+	Create second for Core sql
+		Account Name : kanchan-coresql
+		API : Core(sql)
+
+-----------------------------------
+	Create one api for table
+ 		Account Name : kanchan-table
+		API : Azure Table
+
+6. Open kanchan-mongoapi
+	Data Explorer
+		-> New Database (select) 
+			-> Datbaseid: shopdb
+			-> Throughput : 500 
+				Can be calculated using https://cosmos.azure.com/capacitycalculator/
+	New Databse wil be created.
+
+	Collections
+
+	-Select Database and then select New Collections
+		1st collection - 
+	
+		-Databaseid: shopdb	
+		- Collectionid : products
+		- Shard key (partition key)	:category
+		- Select "provision dedicated throughput for this collection" : 600 
+			it will give dedicated 600 throughput to products collection
+
+	2nd collection
+		-Databaseid: shopdb	
+		- Collectionid : customers
+		- Shard key (partition key)	:city
+		- Don't Select "provision dedicated throughput for this collection" 
+			It will share throughput with database
+
+	Document
+		- New Document 	
+			For Products collection
+
+
+	Repeat step 6 for "sqlapi" -> just it will create items instead of documents
+
+	Repeat step 6 for  "Azure Table" -> New table
+		Table id : customers
+		Entity
+
+
+				
+In MongoDb every document have "_id" by default
+
+but in sql : only Id and other _ (parameters) 
+
+Mongo DB 			Sql api
+Document			Container
+Collection			Items
+
+
+
+------------------------------------------------------
+
+Select one of the database and then From Settings -> Replicate data globally
+	Select any other 2 locations for replicating data .
+
+----------------------------------------------------
+https://docs.microsoft.com/en-us/azure/cosmos-db/distribute-data-globally
+
+
+
+Configure regions
+	Enable multi-region writes
+		Multi-master capability allows you to take advantage of the provisioned throughput for your databases and containers across the globe.
+
+
+ConnectionString 
+(MongoDb API) - ConnectionString - Start with "mongodb"
+Core sql - Key
+Table - Connection String with different options - DefaultEndpointProtocol
+
+sql api -
+	querying - query for reading but for insert or update
+
+
+====================================================================================================================================
+
+Create an application to read core (sql api)
+
+	1. Create Console application " CosmosSqlDemo"
+	2. Add Nuget package - "Microsoft.azure.documentdb.core"
+	3. Add methods Program.cs
+
+Try sample using 
+	
+
+Create an application to read MongoDb 
+	1. Create Console application " CosmosMongoDemo"
+	2. Nuget package "mongodb.driver"
+
+In MongoDb if Database and collection will get created automatically if they are not exists, no need to write code.
+
+------------------------------------------------------------------------
+
+Ques: If you are using Cosmos DB and doing development
+	then for every RU there will some chnarges so how to reduce the cost while development
+
+CosmosDB Emulator : can be used to while development 
+
+------------------------------------------------------------------------
+
+
+***************************************************************************************************************************************
+
+Default Consistency 
+
+	Whenever you are doing Update, Insert and Delete operation database must be consistency
+
+	Data accuracy(latest data)  is not important , but speed of content is matter	- FAcebook app
+	Data accuracy(latest data)  is important, but not speed - Cricket match on Hotstar
+	Data accuracy(latest data) and speed is important - Stock order app
+
+For different types of application are fetching data.
+	Types of consistency 
+	1. Eventual consistency
+		 is the weakest form of consistency wherein a client may get the values which are older than the ones it had seen before, over time.
+	2. Consistent prefix (In order but latest data) -(lagging in some time but how many operations)
+		level guarantees that reads never see out of order writes.
+	3. Session consistency 
+		- For my Session will be latest and sequencelly but for other region/ session - order will be considered but not latest
+	
+		 is most widely used consistency level both for single region as well as, globally distributed applications.
+	4. Bounded staleness consistency (order guarantee)
+		is most frequently chosen by globally distributed applications expecting low write latencies but total global order guarantees
+		- Maximum Lag in Time
+		- Maximum Lag in Operation 
+	5. Strong consistency 
+		provides the most predictable and intuitive programming model. When you configure your account with strong consistency level, Azure Cosmos DB provides linearizability guarantee.
+	5. 
+	

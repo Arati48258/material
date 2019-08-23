@@ -1,0 +1,116 @@
+Kubernetes 
+------------------------
+
+What is Orchestrator?
+What is Kubernetes (K8S)?
+Why it is required?
+What is Kunernetes cluster?
+What is Azure Kubernetes Service?
+
+
+Refer this for all Kubernetes deployment
+https://aksworkshop.io
+
+ingress 
+-domain name services
+- Kind of service which allows you to deploy application using domain name.
+-
+
+
+
+Ques : 
+
+What is different between Docker & non-docker?
+
+2 types 
+
+Eshop 
+	Catalog API
+		docker run -p 8090:80 catalogapi:latest
+	IndentityAPI
+		docker run -p 8091:80 identityapi:latest
+	BasketAPI
+		docker run -p 8092:80 basketapi:latest
+	OrderAPI
+		docker run -p 8093:80 orderapi:latest
+
+Docker-compose	
+	-YAML
+	- Run multiple containers together
+===============================================================================
+What is Orchestrator?
+Orchtrator 
+	- It is tool/software used to manage and monitor the clustered.
+	- It performance automatic patching , scaling, re-deploy, backup, security etc.	
+	- Docker cluster Orchestrastors
+		- Kubernetes 
+		- DC/ OS
+		- DockerSwarn
+	-Non-Docker cluster Orchestrator
+		- Azure Service Fabric
+-------------------------------------------------------------------------
+Ques : 
+
+What is different between Docker & non-docker?
+
+	2 Types of clsuter
+		1. Kunernetes (Docker or container cluster)
+			- Orchestrator - Kubernetes
+			- Used for deploying containerized applications
+				-Containerized applications can monolithic or microservice (means it is containrized using Docker)
+			- There will be a master node and more than one worker nodes
+				-Master-worker architecture
+				- Master node contains the orchestrator service and cluster management service (Name service, Failure Service, Storage Service which are running from master node.) 
+			- 
+				
+		
+		2. Service Fabric cluster (microservice)
+			-Orchestrator - SF
+			- It can deploy only microservice applications not monolithic apps
+				- It can deploy containerized and non containerized apps
+				It can deploy applications which is developed using SF SDK.
+			- There is no master node, it used only worker nodes
+				-Every worker noes is also master node.
+
+
+-------------------------------------------------------------------------
+
+What is Azure Kubernetes Service?
+- It is a managed clustered and master node is managed by azure iyself.
+
+-2 Container clusters 
+
+	1.  AKS is a managed Kubernetes cluster (introduced 2 years back)
+		It supports only Kubernetes
+			They removed others as they support Linux (Container Service (deprecated))
+	2. ACS (old service, now deprecated) is an examplr for unmanaged Kubernetes cluster
+		- ACS provides option for selecting Orchestrstor type. such as (Kubernetes, DockerSwarn, DC/OS) 
+
+
+-------------------------------------------------------------------------
+Node 
+	Is it a machine
+
+Pod 
+	-it is container of container
+Scheduler
+	Creating a containers in the node (worker machines)
+Desired State
+
+Scale up 
+	Adding containers
+Scale out 
+	Adding resources	
+Replication Controller
+	
+Here every servcie we need load balancer.
+
+Que : How to map Service and containers?
+	- Every Pod has IP but IP may change, so use lable, as it will not change.
+	- Lable can be more than 1.
+	- If lable is wrong, then we will not get the output, request will go till service but not to container.
+	- 
+	eg: App=Event
+		Ver = 2.0	
+
+		

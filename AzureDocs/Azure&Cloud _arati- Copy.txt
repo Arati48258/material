@@ -1,0 +1,263 @@
+Topic : 
+1. On-premise server 
+2. 
+
+Links 
+>https://www.bmc.com/blogs/saas-vs-paas-vs-iaas-whats-the-difference-and-how-to-choose/
+>https://azure.microsoft.com/en-us/
+>https://azure.microsoft.com/en-us/global-infrastructure/regions/
+> https://azure.microsoft.com/en-us/free
+
+Microsoft Azure 
+-----------------------
+Azure speed - 150mb/s
+	Why?
+		Onpremise data centers?
+		Cons: 		
+			-Infrastructure cost
+			-Backup
+			-Diaster recovery
+			- Security and compliance	
+			-Scaling (time for scaling is high)
+			- Global reach (lattancy)
+
+		-Cloud
+			-Pooled resources
+			-Security and Copliance is built-in
+			-built-in Backup
+			-DR as a service
+			-Scale in seconds
+			-Global reach and georeplication
+			-Pay per Use(pay as you go)
+			-automatic monitorin and auditing (alerts)
+
+
+
+	What?
+		-Cloud is as set of interconnected datacenters with pool of resources that can be accesible over internet.
+		-Cloud Types:-
+			-Private:-Cisco, HP
+			-Public :-Azure, AWS, google Cloud
+			-Hybrid
+		-Cloud Service Models:-
+			-IaaS - Infrastructure as a Service:
+			    -Cloud vendor is providing infra such as network,virtual machine(computer), storage (disk),firewall , IP address
+			    -IT pro (Admin) will be using  such services.
+
+			-PassS -Platform as Service:
+			      -Preconfigured Platform
+			      -Developers
+
+			-SaaS   -Software as Service:
+			       -Software as a Service
+			       -Office 365,dyanmic CRM,One Drive,GoogleDrive,Gmail,Skype
+				
+	How?
+	          Microsoft Azure
+		-->Data Center/Regions/Location
+		       -54+ Regions
+		       -India we have 3 data center: South,Central and West
+			-South- Chennai
+			-West- Mumbai
+			-Central - Pune
+		       -Other DataCenters
+			-US- EastUS , East Us2 , West Us, South Central Us
+			-Brazil, SouthEast Asia (Singapore),East Asia (Hongkong)
+			-Azure has datacenters in China, but they are accesaible to only to chinese
+			-Germamy ,US Governmnet
+
+		-->Subscriptions
+			-Agreement Between customer and microsoft.
+			-Subscription Types:
+				-Pay As You Go
+				-Enterprise agreement
+				-free subscriptions:
+					-Free trail
+					-Recurring subscriptions (for Microsoft certified peoples)
+
+		-Deployment Model
+			- Azure Resource Manager Model (ARM Model) 
+		     	-Resouce Group
+				-Logical grouping of one or more services.
+		-How to work with Azure?
+			
+
+
+
+
+
+
+
+			Create an account with Azure 
+				https://azure.microsoft.com/en-us/free
+
+				Click on start free
+
+				Use Hexaware id
+
+
+
+*****************************************************
+-Storage account:
+	-one of the primary storage sevices in Azure
+	-Storage option in storage account:
+		-Blob storage:
+			-Used for storing unstructured blob files such as audio, vedio, 
+			 images, text files,documents, execuatables etc.
+		-File share:
+			-Similar to Blob Services.
+			-It uses an SMB 3.0 protocol to map the fileshare as a netowrk
+			 drive in our personal machine.
+		-Queue
+			-Is used to implement app-app integration uding text.,messages
+			-supports message based communucation.
+			=one to many messaging with offline communication feature.
+			-one message size is maximum  64 KB(SB Queue meesages can have 
+			 up to 256 kb)
+			-TTL for message 7 days (SB queue TTL is 14 days)
+			-FIFO is not guranteed (SB queue FIFO is guranted)
+			-Partitionating of message is not possible (SB queue support it)
+		-Table 
+			-NoSQL data storage in storage account.
+			-store the data in key-value pair format.
+			-Every record (entry) is called as entity.
+			-Every entity must have a RowKey and Partitionkey.
+			-Every entity will have a Timestamp value also.
+			-One entity can have maximumof 256 attributes (keys)
+				-256-3=253 keys
+			
+
+-storage account:(they store 500 TB)
+	-v1
+		-Performance:Standard+Premimum
+		-Access tier:not available
+		-All 4 services models available  (Blob+ file + queue+ Table)
+	-Blob
+		-performance:only standard is availble
+		-Access tier:Hot and Cool available
+		-only blob  is available
+	-v2
+		-
+-Replication
+	-LRS-Locally redundant(low cost)
+	-ZRS-zone redundant
+	-GRS-Geo Replication
+	-RA-GRS-read access (High Cost)
+-Blob
+	-container-Root Storage place
+	-container access policy
+		-Blob
+			-You can anonymously access files (blob) with out any key
+			 or token
+			-Use the file URL to access it
+			-Url:https://<storageaccname>.blob.core.windows.net/<containers>/<file>
+			-Directory browsing is not allowed.
+		-Container
+			-You can anonymously access files (blob) with out any key or token
+			-blob listing (Directory Browsing ) is supported
+		-private
+			-anonymous access not allowed
+			-Need an access token to acces files
+			-It ias an secure than other modes
+		=-Credintials
+			-access key
+			-Token (SAS) shared folder
+
+***************************************************
+
+WindowAzureStorage install in visual studio
+
+**********************************************
+-App Service
+	-This is a Compute services used to deploy the web applications on Azure.
+	-App Service
+		-Web app
+			-web applications including ASP.NET,MVC,Java,PHP,NodeJs etc.
+		-API App
+			-User to deploy REST and WebService Applications
+		-Mobile App
+			-Used to deploy the mobile application backend services
+	-PaaS Services configured with all kinds of languages and fraemworks
+	-Web App
+		-Unique Web app Name:
+		-https://<webappname>.azurewebsites.net-->https://hexaware.com
+		-Location-where to deploy
+		-App Service Plan
+			-pricing model
+			-Instance Suze (VMSize)
+		-Application Insights (Monitoring tool)-optional
+		-Pricing Model
+			-free
+			   -No Cost
+			   -No SLA
+			   -Dev and Test
+			   -No Dedicated machine (Using shared machine)
+			   -No Custom Domain
+			   -No Deployement slots
+			-Shared
+			   -Custom domain mapping		
+			   -Not Free (a minor amount to be paid)
+			-Basic
+			   -Dedicated machine (A series VM)
+			   -SLA 99.99%
+			-Standard (Recommended for production)
+			   -5 Deployment alots
+			   -Backup daily 10 times
+			   -Traffic manager
+			   -S1, S2(2 CPU WITH 2), S3(7 GB RAM WITH CORE)
+			-Premium
+			   -20 deployment slots
+		   	   -Daily 50 Times backup
+			   -P1, P2 ,P3 (A Series VM) ->PIV2, P2V2, P3V2 (D Series VM)
+			-Isolated (ASE)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+*********************
+customer.cs
+
+ public Customer(string customerId, string insuranceType)
+        {
+            this.Rowkey = customerId;
+            this.PartitionKey = insuranceType;
+        }
+        public string Fullname { get; set; }
+        public string Email { get; set; }
+        public double Amount { get; set; }
+        public DateTime AppDate { get; set; }
+
+        public DateTime EndDate { get; set; }
+        public string ImageUrl { get; set; }
+*************
+view  odel.cs
+
+  public string FullName { get; set; }
+        public string Email { get; set; }
+        public double Amount { get; set; }
+        public double Premium { get; set; }
+        public string InsuranceType { get; set; }
+
+        [DataType(DataType.Date)]
+        public DateTime Appdate { get; set; }

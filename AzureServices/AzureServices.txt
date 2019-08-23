@@ -1,0 +1,275 @@
+. current folder
+.. Parent folder
+Azure Services Lists
+
+
+1. StorageService- 
+2. AppService - deployment of application / compute service
+3. Database Service - Cosmos DB
+4. Serverless Services
+5. ACI - Azure Container Instances
+6. Azure Functions
+7. Azure Logic App
+8. Integration service (biztalk)
+
+Function app tool 
+	https://docs.microsoft.com/en-us/azure/azure-functions/functions-run-local
+
+
+Command : npm install -g azure-functions-core-tools
+
+====================================================
+
+Serverless Computing
+	WHAT? 
+	- App Service - firstly it allocate some CPU/RAM/ VM (Pre-allocated resources)
+	- Clusters - Means connected/ group of machines.
+	- In Serverless - No dedicated VM/ machines are allocated.
+	- When request come (not only http) then application need to start and allocate resources.
+	- Pricing for number of requests not for number of resources
+	- Compute resources are allocated when the request comes.
+	- When the request execution completes it deallocates the resources.
+	- Billing is based on number of requests * duration
+	- Serverless Azure Services
+		1. ACI - Azure Container Instances
+		2. Azure Functions
+		3. Azure Logic App
+=================================================================================
+	1. Azure Container Instances
+		- Used to run containers in a serverless mode.
+		- It can run one Docker container per instance.
+		- Used in Kubernates additional container
+
+-----------------------------
+		- First push your build to docker hub then open azure portal
+			1. Add Dockerfile & .Dockerignore
+			2. Docker build - docker build -t kanchanbhong/insuranceclient:latest .
+			3. Docker push - docker push kanchanbhong/insuranceclient:latest
+			4. Open Azure portal and search for Container Instance
+	
+			refer : ContainerInstance.PNG
+
+		e.g. When you want add additional resources for limited period we can go for ACI, as it is rapid scaling
+ 			Real example - Big billion day in flipkart
+		
+=================================================================================
+
+	2. Azure Logic App (For creating WorkFlows)
+		- It is serverless service for creating integration services on azure
+		- It used for creating workflow applications on azure.
+
+		- It is also Integration Paas (IPaaS)
+		- Logic App provides a Visual Designer for creating workflow.
+
+		- You can integrate muliple SaaS applications in a workflow. (Twitter, gmail, outlook, hotmail - SaaS applications)
+			1. Read the copy from one drive
+			2. Copy to storage - 
+			3. Sending email 
+
+		- SaaS Connectors
+		- Trigger types
+			- Push trigger
+			- Pull Trigger
+			- Reccurance trigger
+			Push trigger 
+				Workflow is created when somebody is called it Http Request (trigger) , WebHook trigger
+			Pull trigger
+				Workflow itself check for something (scan for newly added thing) 
+				eg: Twitter ( go and scan ) 
+			Reccurance
+				-After every specific period it will check of update 
+				eg: Backup trigger, Timer tigger
+
+				
+		- Integration Service - 
+			-> typically means used for integrating 2 or more applications 
+			-> queue also integration service (one is publishing and other is consuming)
+
+
+-------------------------------------
+Sample 
+
+Create a Logic App 
+	1. Search for Logic App in Azure Portal(refer AzureService -LogicApp.PNG)
+	2. Go to LogicAppDemo1 - Logic app designer for more details
+	3. Select Blank Logic App
+	4. Search for One drive
+		Trigger : when file is created 
+		for gmail
+		Trigger : When a new email arrives
+		Sign in into gmail account
+			refer AzureService -LogicAppTrigger.PNG)
+		Action: Choose for action -> search for blob and select Create Blob
+
+
+---------------------
+
+HTTP type logic app
+
+================================================================================
+Integration Service
+	For this you can create Integration Account
+
+
+Azure Functions
+	-Function app is a also a serverless computing system.
+	- Code based - c#, Javascript, Java, Python etc.
+	- Here we have to write a code.
+	- Function also uses triggers to start execution
+		-Binding
+			- Input Binding
+				eg: Trigger is alos a type of input binding
+				
+			- Output Binding
+			eg: Reading from queue and writing  into blob.
+				Here Input binding is Queue and output : blob
+
+		-There can be zero or more input and output bindings
+		- 2 Versions of Function App runtime available 
+			-V1- .NET framework based
+			-V2 - .NET core based
+		- How & where to develope?
+			-You can develop function apps inside Azure portal.
+			- Write using Function App runtime in local machine.
+				-Needs to install func app CLI can be used to create, build, run , test and deploy
+				
+		-npm install -g azure-functions-core-tools
+	-Pricing 
+		- As it is serverless computing but there are 2 types pricing options available
+		1. Consumption plan
+			-It is a exact serverless pricing model 
+				like no. of reuests * duration
+			- There is no dedicated VM insstance allocated
+			-Default Maximum execution time is 5 minutes, otherwise it will timeout (means resource will get deallocated)
+		2. AppService plan	
+			-We dont need to pay additionally for FunctionApp, because our function will be executing withing the AppService Plan.
+			- No timeout for the function execution
+			- You must enable 'Always On'
+
+Azure Function App is a project and Azure Function is a function .
+--------------------------------
+Create Function App
+	1. Go to Azure Portal and Function App
+	
+	Pass function key in header using 
+		x-function-key
+
+
+
+
+-----------------------------
+
+Que: What will be the name of the function when you are developing Function APP using VS? 
+ [FunctionName("MyHttpFunction")]
+
+
+Create New proect in VS as FunctionApp
+
+==================================================
+Publish Azure Function using CLI (When you dont have Studio to code the project eg: in Linux and Mac) 
+
+	Command based approach
+1. First  check func is installed, if not install using command - npm install -g azure-functions-core-tools
+2. Go to project folder (create a new folder ) 
+3. First command -func init
+	D:\Hexa-FSD-Batch-4\Kanchan\AzureServices\FunctionAppUsingCmd>func init
+	Select a worker runtime:
+	dotnet
+	node
+	python
+	powershell (preview)
+Select dotnet
+4. Open project in VS Code
+4. Go to cmd and type - func new
+
+
+	D:\Hexa-FSD-Batch-4\Kanchan\AzureServices\FunctionAppUsingCmd>func new
+Select a template:
+QueueTrigger
+HttpTrigger
+BlobTrigger
+TimerTrigger
+DurableFunctionsOrchestration
+SendGrid
+EventHubTrigger
+ServiceBusQueueTrigger
+ServiceBusTopicTrigger
+EventGridTrigger
+CosmosDBTrigger
+IotHubTrigger
+	Select HttpTrigger
+
+
+D:\Hexa-FSD-Batch-4\Kanchan\AzureServices\FunctionAppUsingCmd>func new
+Select a template: Function name: MyHttpFunction
+MyHttpFunction
+
+The function "MyHttpFunction" was created successfully from the "HttpTrigger" template.
+
+
+6. Create Timer Function as well 
+
+7. To install extensions which are used we can use cmd - func extension install 
+	Like for bob trigger , we need extension
+
+8. Run it using cmd - func start
+
+9. Deploy in Cloud (Publish )
+	cmd will give you list of functiosn in functionapp (in azure portal) - func azure functionapp list-functions kanchan-functionapp
+
+	If getting error in connecting 
+	use cmd - az login 
+
+10. Create a new function app in azure portal 
+	kanchan-functionappdemo 
+11. Publish 
+	func azure functionapp publish kanchan-functionappdemo 
+
+	output 
+	D:\Hexa-FSD-Batch-4\Kanchan\AzureServices\FunctionAppUsingCmd>func azure functionapp list-functions kanchan-functionappdemo
+Functions in kanchan-functionappdemo:
+Use --show-keys to retrieve the Http-triggered URLs with appropriate keys in them (if enabled)
+
+to execute above command we need to install azure related CLI 
+
+
+
+
+
+
+
+
+===============================================
+
+
+Publish 
+func azure functionapp publish kanchan-InsurancePortalFunc -i --force
+
+Would you like to overwrite value in azure? [yes/no/show]
+no
+
+
+
+Refer 
+
+	Error:
+
+Function (kanchan-InsurancePortalFunc/WatermarkImageFn) Error: The binding type(s) 'blobTrigger' are not registered. Please ensure the type is correct and the binding extension is installed.
+Session Id: 61c5ec6908e344c5823b0fb352297dee
+
+Timestamp: 2019-08-22T06:23:26.412Z
+
+CHnage in .csproj
+	<DisableFunctionExtensionVersionUpdate>true</DisableFunctionExtensionVersionUpdate>
+Create FunctionApp
+	Runtime -~1
+
+Refer 
+
+https://docs.microsoft.com/en-us/azure/azure-functions/set-runtime-version
+
+
+https://docs.microsoft.com/en-us/azure/azure-functions/functions-run-local
+
+
+	

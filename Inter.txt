@@ -1,0 +1,17 @@
+entry point
+
+parent-child component data transfer
+
+Startup.cs
+-> scaffolding in Entity and angular
+
+Reposity pattern
+
+SQL : Binary length erro (how to debud)
+	
+Routing
+
+Lazy loading
+
+ResposneCache
+

@@ -1,0 +1,51 @@
+version: "3"
+
+networks: 
+  frontend:
+    driver: bridge
+  backend:
+    driver: bridge
+
+services:
+# Service name is mssql, it is not container name
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2017-latest-ubuntu # when you execute this command it will try to create new container using this image
+    container_name: mysqlContainer
+    ports: 
+      - "1434:1433"
+    networks: 
+      - backend
+    environment: 
+      SA_PASSWORD: ${SQL_PASSWORD} # SQL_PASSWORD - variable
+      ACCEPT_EULA: ${ACCEPT_LIECENSE} 
+
+  identitysvc:
+    build: ./IdentityAPI/IdentityAPI/
+    container_name: identityContainer
+    ports: 
+      - "5000:80"    
+    depends_on: 
+      - mssql
+    networks: 
+      - backend
+    environment:
+      - ConnectionStrings:SqlConnection=${IDENTITY_CONNECTION_STRING}
+      #- Jwt:Secret=${JWT_SECRET}
+      #- Jwt:Issuer=${JWT_ISSUER}
+      #- Jwt:Audience=${JWT_AUDIENCE}
+
+  eventsvc:
+    build: ./EventAPI/EventAPI/
+    container_name: eventapi
+    ports: 
+      - "5001:80"    
+    depends_on: 
+      - mssql
+      - identitysvc
+    networks: 
+      - backend
+    environment:
+      - ConnectionStrings:SqlConnection=${EVENT_CONNECTION_STRING}
+     # - Jwt:Secret=${JWT_SECRET}
+      #- Jwt:Issuer=${JWT_ISSUER}
+     # - Jwt:Audience=${JWT_AUDIENCE}

@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mssql
+spec:
+  selector:
+    app: sql
+  ports:
+  - port: 1433
+    targetPort: 1433
+    # If type is LoadBalancer then it will create External , if it is ClusterIP then it will be internal 
+  type: LoadBalancer
